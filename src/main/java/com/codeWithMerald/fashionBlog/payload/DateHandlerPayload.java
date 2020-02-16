@@ -2,7 +2,7 @@ package com.codeWithMerald.fashionBlog.payload;
 
 import java.sql.Timestamp;
 
-public class DateHandlerPayload {
+public abstract class DateHandlerPayload {
     private Timestamp createdAt;
 
     private Timestamp updatedAt;

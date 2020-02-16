@@ -19,6 +19,9 @@ public class PostRequest {
     @NotNull
     private List<String> comments;
 
+    private Integer likes;
+    private Integer unlikes;
+
     public String getTitle() {
         return title;
     }
@@ -38,6 +41,22 @@ public class PostRequest {
     public List<String> getComments() {
 
         return comments == null ? Collections.emptyList() : new ArrayList<>(comments);
+    }
+
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
+
+    public Integer getUnlikes() {
+        return unlikes;
+    }
+
+    public void setUnlikes(Integer unlikes) {
+        this.unlikes = unlikes;
     }
 
     public void setComments(List<String> comments) {
