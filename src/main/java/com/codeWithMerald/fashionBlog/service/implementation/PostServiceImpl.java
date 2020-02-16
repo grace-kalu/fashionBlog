@@ -9,6 +9,8 @@ import com.codeWithMerald.fashionBlog.payload.response.PostResponse;
 import com.codeWithMerald.fashionBlog.repository.CommentRepository;
 import com.codeWithMerald.fashionBlog.repository.PostRepository;
 import com.codeWithMerald.fashionBlog.service.PostService;
+import com.codeWithMerald.fashionBlog.utils.AppUtils;
+import com.codeWithMerald.fashionBlog.utils.ServiceUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static com.codeWithMerald.fashionBlog.utils.AppConstants.*;
 
 @Service
 public class PostServiceImpl implements PostService {
