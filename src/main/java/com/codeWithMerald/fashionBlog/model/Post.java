@@ -1,70 +1,63 @@
 package com.codeWithMerald.fashionBlog.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
-@javax.persistence.Table(name = "comments")
-public class Comment extends DateHandler{
+@javax.persistence.Table(name = "posts", uniqueConstraints = {@UniqueConstraint(columnNames = {"title"})})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Post extends DateHandler {
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column(name = "name")
+    @NotNull
     @NotBlank
-    @Size(min = 4, max = 50)
-    private String name;
-
-    @Column(name = "email")
-    @NotBlank
-    @Email
-    @Size(min = 4, max = 50)
-    private String email;
-
-    @Column(name = "content")
-    @NotBlank
-    @Size(min = 10, message = "Comment body must be minimum 10 characters")
+    private String title;
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @Column(name = "likes")
+    private Integer likes = 0;
 
-    public Comment() {
+    @Column(name = "unlikes")
+    private Integer unlikes = 0;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
+
+    public Post() {
     }
 
-    public Comment(@NotBlank @Size(min = 10, message = "Comment body must be minimum 10 characters") String content) {
+    public Post(String title, String content) {
+        this.title = title;
         this.content = content;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -75,12 +68,32 @@ public class Comment extends DateHandler{
         this.content = content;
     }
 
-    @JsonIgnore
-    public Post getPost() {
-        return post;
+    public Integer getLikes() {
+        return likes;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
+
+    public Integer getUnlikes() {
+        return unlikes;
+    }
+
+    public void setUnlikes(Integer unlikes) {
+        this.unlikes = unlikes;
+    }
+
+    public List<Comment> getComments() {
+        return comments == null ? null : new ArrayList<>(comments);
+    }
+
+    public void setComments(List<Comment> comments) {
+        if (comments == null) {
+            this.comments = null;
+        } else {
+            this.comments = Collections.unmodifiableList(comments);
+        }
     }
 }
+
