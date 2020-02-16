@@ -1,5 +1,6 @@
 package com.codeWithMerald.fashionBlog.service.implementation;
 
+import com.codeWithMerald.fashionBlog.exception.ResourceNotFoundException;
 import com.codeWithMerald.fashionBlog.model.Comment;
 import com.codeWithMerald.fashionBlog.model.Post;
 import com.codeWithMerald.fashionBlog.payload.request.PostRequest;
@@ -99,7 +100,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post updatePost(Integer id, PostRequest newPostRequest) {
-        Post post = postRepository.findById(id).orElseThrow(() -> ResourceNotFoundException(POST, ID, id));
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(POST, ID, id));
         post.setTitle(newPostRequest.getTitle());
         post.setContent(newPostRequest.getContent());
         return postRepository.save(post);

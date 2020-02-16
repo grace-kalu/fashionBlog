@@ -1,5 +1,7 @@
 package com.codeWithMerald.fashionBlog.service.implementation;
 
+import com.codeWithMerald.fashionBlog.exception.BlogApiException;
+import com.codeWithMerald.fashionBlog.exception.ResourceNotFoundException;
 import com.codeWithMerald.fashionBlog.model.Comment;
 import com.codeWithMerald.fashionBlog.model.Post;
 import com.codeWithMerald.fashionBlog.payload.request.CommentRequest;
@@ -61,7 +63,7 @@ public class CommentServiceImpl implements CommentService {
             return comment;
         }
 
-        throw new BlogapiException(HttpStatus.BAD_REQUEST, COMMENT_DOES_NOT_BELONG_TO_POST);
+        throw new BlogApiException(HttpStatus.BAD_REQUEST, COMMENT_DOES_NOT_BELONG_TO_POST);
     }
 
     @Override
@@ -84,7 +86,7 @@ public class CommentServiceImpl implements CommentService {
                 .orElseThrow(() -> new ResourceNotFoundException(COMMENT_STR, ID_STR, id));
 
         if (!comment.getPost().getId().equals(post.getId())) {
-            throw new BlogapiException(HttpStatus.BAD_REQUEST, COMMENT_DOES_NOT_BELONG_TO_POST);
+            throw new BlogApiException(HttpStatus.BAD_REQUEST, COMMENT_DOES_NOT_BELONG_TO_POST);
         }
 
 

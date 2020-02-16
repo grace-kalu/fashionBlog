@@ -1,5 +1,7 @@
 package com.codeWithMerald.fashionBlog.utils;
 
+import com.codeWithMerald.fashionBlog.exception.BadRequestException;
+
 public class ServiceUtils {
     public static void validatePageNumberAndSize(int page, int size) {
         if (page < 0) {
