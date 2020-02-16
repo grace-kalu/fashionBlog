@@ -111,7 +111,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post likeAPost(Integer id, PostRequest newPostRequest) {
         Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(POST, ID, id));
-        post.setLikes(post.getLikes());
+        post.setLikes(post.getLikes() + 1);
 
         return post;
     }
@@ -119,7 +119,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post disLikeAPost(Integer id, PostRequest newPostRequest) {
         Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(POST, ID, id));
-        post.setUnlikes(post.getUnlikes());
+        post.setUnlikes(post.getUnlikes() + 1);
 
         return post;
     }
