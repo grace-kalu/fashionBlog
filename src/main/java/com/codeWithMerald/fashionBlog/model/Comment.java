@@ -1,5 +1,3 @@
-
-
 package com.codeWithMerald.fashionBlog.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
