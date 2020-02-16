@@ -1,6 +1,7 @@
 package com.codeWithMerald.fashionBlog.service;
 
 import com.codeWithMerald.fashionBlog.model.Post;
+import com.codeWithMerald.fashionBlog.payload.request.PostRequest;
 import org.springframework.stereotype.Service;
 
 @Service
