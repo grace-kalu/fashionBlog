@@ -1,8 +1,11 @@
 package com.codeWithMerald.fashionBlog.service;
 
 import com.codeWithMerald.fashionBlog.model.Post;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface PostService {
+
     PostResponse addPost(PostRequest postRequest);
 
     Post getPost(Integer id);
@@ -16,4 +19,5 @@ public interface PostService {
     Post updatePost(Integer id, PostRequest newPostRequest);
 
     ApiResponse deletePost(Integer id);
+
 }
