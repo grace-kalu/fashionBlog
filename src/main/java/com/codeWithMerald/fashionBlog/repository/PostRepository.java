@@ -10,8 +10,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PostRepository extends JpaRepository<Post, Integer> {
-    Page<Post> findPostsByTitle(String title, Pageable pageable);
+public interface
+PostRepository extends JpaRepository<Post, Integer> {
+    Post findPostsByTitle(String title);
     Page<Post> findPostsByComments(List<Comment> comment, Pageable pageable);
 }
 
