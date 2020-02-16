@@ -14,7 +14,7 @@ public class PostRequest {
 
     @NotBlank
     @Size(min = 50)
-    private String body;
+    private String content;
 
     @NotNull
     private List<String> comments;
@@ -27,12 +27,12 @@ public class PostRequest {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
+    public String getContent() {
+        return content;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setContent(String body) {
+        this.content = body;
     }
 
     public List<String> getComments() {
