@@ -108,18 +108,22 @@ public class PostServiceImpl implements PostService {
         return new ApiResponse(Boolean.TRUE, "You successfully deleted post");
     }
 
-    private void validatePageNumberAndSize(int page, int size) {
-        if (page < 0) {
-            throw new BadRequestException("Page number cannot be less than zero.");
-        }
+    @Override
+    public Post likeAPost(Integer id, PostRequest newPostRequest) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(POST, ID, id));
+        post.setLikes(post.getLikes());
 
-        if (size < 0) {
-            throw new BadRequestException("Size number cannot be less than zero.");
-        }
-
-        if (size > AppConstants.MAX_PAGE_SIZE) {
-            throw new BadRequestException("Page size must not be greater than " + AppConstants.MAX_PAGE_SIZE);
-        }
+        return post;
     }
+
+    @Override
+    public Post disLikeAPost(Integer id, PostRequest newPostRequest) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(POST, ID, id));
+        post.setUnlikes(post.getUnlikes());
+
+        return post;
+    }
+
+
 }
 
