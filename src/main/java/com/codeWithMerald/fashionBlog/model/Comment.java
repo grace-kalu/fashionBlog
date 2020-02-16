@@ -43,7 +43,7 @@ public class Comment extends DateHandler{
         this.content = content;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
