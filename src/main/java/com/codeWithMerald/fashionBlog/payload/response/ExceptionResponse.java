@@ -1,5 +1,7 @@
 package com.codeWithMerald.fashionBlog.payload.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +11,7 @@ public class ExceptionResponse {
     private String error;
     private Integer status;
     private List<String> messages;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private Instant timestamp;
 
     public ExceptionResponse(List<String> messages, String error, Integer status) {
