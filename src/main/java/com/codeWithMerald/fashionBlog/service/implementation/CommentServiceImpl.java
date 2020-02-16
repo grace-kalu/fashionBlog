@@ -8,6 +8,7 @@ import com.codeWithMerald.fashionBlog.payload.response.PagedResponse;
 import com.codeWithMerald.fashionBlog.repository.CommentRepository;
 import com.codeWithMerald.fashionBlog.repository.PostRepository;
 import com.codeWithMerald.fashionBlog.service.CommentService;
+import com.codeWithMerald.fashionBlog.utils.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
