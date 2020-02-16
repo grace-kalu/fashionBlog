@@ -1,3 +1,23 @@
 package com.codeWithMerald.fashionBlog.service;
 
-public interface CommentService {}
+import com.codeWithMerald.fashionBlog.model.Comment;
+import org.springframework.stereotype.Service;
+
+@Service
+public interface CommentService {
+
+    Comment addComment(CommentRequest commentRequest, Integer postId);
+
+    Comment getComment(Integer postId, Integer id);
+
+    Comment updateComment(Integer postId, Integer id, CommentRequest commentRequest);
+
+    PagedResponse<Comment> getAllComments(Integer postId, int page, int size);
+
+    ApiResponse deleteComment(Integer postId, Integer id);
+
+}
+
+
+
+
