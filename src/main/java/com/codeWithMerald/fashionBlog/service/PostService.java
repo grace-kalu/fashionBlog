@@ -24,4 +24,7 @@ public interface PostService {
 
     ApiResponse deletePost(Integer id);
 
+    Post likeAPost(Integer id, PostRequest newPostRequest);
+
+    Post disLikeAPost(Integer id, PostRequest newPostRequest);
 }
