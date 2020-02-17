@@ -28,6 +28,7 @@ import static com.codeWithMerald.fashionBlog.utils.AppConstants.*;
 
 @Service
 public class PostServiceImpl implements PostService {
+
     private PostRepository postRepository;
     private CommentRepository commentRepository;
 
@@ -56,8 +57,12 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public Post getPost(Integer id) {
-        return postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(POST, ID, id));
+    public PostResponse getPost(Integer id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(POST, ID, id));
+        PostResponse postResponse = new PostResponse();
+        postResponse.setTitle(post.getTitle());
+        postResponse.setContent(post.getContent());
+        return postResponse;
     }
 
 
@@ -81,29 +86,32 @@ public class PostServiceImpl implements PostService {
         return postRepository.findPostsByTitle(title);
     }
 
+//    @Override
+//    public PagedResponse<Post> getPostsByComments(Integer id, int page, int size) {
+//        AppUtils.validatePageNumberAndSize(page, size);
+//
+//        Comment comment = commentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(COMMENT, ID, id));
+//
+//        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, CREATED_AT);
+//
+//        Page<Post> posts = postRepository.findByComment(Collections.singletonList(comment), pageable);
+//
+//        List<Post> postList = posts.getNumberOfElements() == 0 ? Collections.emptyList() : posts.getContent();
+//
+//        return new PagedResponse<>(postList, posts.getNumber(), posts.getSize(), posts.getTotalElements(),
+//                posts.getTotalPages(), posts.isLast());
+//    }
+
+
     @Override
-    public PagedResponse<Post> getPostsByComments(Integer id, int page, int size) {
-        AppUtils.validatePageNumberAndSize(page, size);
-
-        Comment comment = commentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(COMMENT, ID, id));
-
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, CREATED_AT);
-
-        Page<Post> posts = postRepository.findPostsByComments(Collections.singletonList(comment), pageable);
-
-        List<Post> postList = posts.getNumberOfElements() == 0 ? Collections.emptyList() : posts.getContent();
-
-        return new PagedResponse<>(postList, posts.getNumber(), posts.getSize(), posts.getTotalElements(),
-                posts.getTotalPages(), posts.isLast());
-    }
-
-
-    @Override
-    public Post updatePost(Integer id, PostRequest newPostRequest) {
+    public ApiResponse updatePost(Integer id, PostRequest newPostRequest) {
         Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(POST, ID, id));
         post.setTitle(newPostRequest.getTitle());
         post.setContent(newPostRequest.getContent());
-        return postRepository.save(post);
+        postRepository.save(post);
+
+        return new ApiResponse(Boolean.TRUE, "You Successfully Updated post");
+
     }
 
     @Override
@@ -128,6 +136,20 @@ public class PostServiceImpl implements PostService {
 
         return post;
     }
+
+//    @Override
+//    public PagedResponse<Post> getByTitle(String title, int page, int size) {
+//        ServiceUtils.validatePageNumberAndSize(page, size);
+//
+//        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, CREATED_AT);
+//
+//        Page<Post> posts = postRepository.getByQuery(title, pageable);
+//
+//        List<Post> postList = posts.getNumberOfElements() == 0 ? Collections.emptyList() : posts.getContent();
+//
+//        return new PagedResponse<>(postList, posts.getNumber(), posts.getSize(),
+//                posts.getTotalElements(), posts.getTotalPages(), posts.isLast());
+//    }
 
 
 }

@@ -14,20 +14,22 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/posts/{postId}/comments")
+@RequestMapping("/posts/{postId}/comments")
 public class CommentController {
-
-    private final CommentService commentService;
     @Autowired
-    public CommentController(CommentService commentService) {
-        this.commentService = commentService;
-    }
+    private CommentService commentService;
+
+//    @Autowired
+//    public CommentController(CommentService commentService) {
+//        this.commentService = commentService;
+//    }
+
     @PostMapping
     public ResponseEntity<Comment> addComment(@Valid @RequestBody CommentRequest commentRequest,
                                               @PathVariable(name = "postId") Integer postId) {
         Comment newComment = commentService.addComment(commentRequest, postId);
 
-        return new ResponseEntity<Comment>(newComment, HttpStatus.CREATED);
+        return new ResponseEntity<>(newComment, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

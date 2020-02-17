@@ -16,11 +16,15 @@ public class PostRequest {
     @Size(min = 50)
     private String content;
 
-    @NotNull
     private List<String> comments;
 
     private Integer likes;
     private Integer unlikes;
+
+    public PostRequest(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 
     public String getTitle() {
         return title;

@@ -12,19 +12,22 @@ public interface PostService {
 
     PostResponse addPost(PostRequest postRequest);
 
-    Post getPost(Integer id);
+    PostResponse getPost(Integer id);
 
     PagedResponse<Post> getAllPosts(int page, int size);
 
     Post getPostByTitle(String title);
 
-    PagedResponse<Post> getPostsByComments(Integer id, int page, int size);
+   // PagedResponse<Post> getPostsByComments(Integer id, int page, int size);
 
-    Post updatePost(Integer id, PostRequest newPostRequest);
+    ApiResponse updatePost(Integer id, PostRequest newPostRequest);
 
     ApiResponse deletePost(Integer id);
 
     Post likeAPost(Integer id, PostRequest newPostRequest);
 
     Post disLikeAPost(Integer id, PostRequest newPostRequest);
+
+    //PagedResponse<Post> getByTitle(String title, int page, int size);
+
 }

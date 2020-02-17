@@ -33,10 +33,12 @@ public class CommentServiceImpl implements CommentService {
 
     private static final String COMMENT_DOES_NOT_BELONG_TO_POST = "Comment does not belong to post";
 
-    private final CommentRepository commentRepository;
 
-    private final PostRepository postRepository;
+    private  CommentRepository commentRepository;
 
+    private  PostRepository postRepository;
+
+    @Autowired
     public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;

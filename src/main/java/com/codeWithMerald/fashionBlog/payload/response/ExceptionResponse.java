@@ -11,7 +11,7 @@ public class ExceptionResponse {
     private String error;
     private Integer status;
     private List<String> messages;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy hh:mm:ss")
     private Instant timestamp;
 
     public ExceptionResponse(List<String> messages, String error, Integer status) {

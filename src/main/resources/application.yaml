@@ -12,7 +12,7 @@ spring:
       ddl-auto: create # use this autocreate database if it is embeded
 #      show-sql: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/kiosk2
+    url: jdbc:postgresql://localhost:5432/fashionblog
     username: postgres
     password: S@pph4grace
     initialization-mode: always

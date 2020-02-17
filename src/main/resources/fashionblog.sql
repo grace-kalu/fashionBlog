@@ -21,4 +21,11 @@ CREATE TABLE comments (
     PRIMARY KEY (id, post_id),
     CONSTRAINT comment_post_fkey FOREIGN KEY (post_id) REFERENCES posts (id) MATCH SIMPLE
         ON UPDATE NO ACTION ON DELETE NO ACTION
-    )
+    );
+
+INSERT INTO posts(title, content)
+VALUES
+('Think and grow rich', 'To grow rich you must think far'),
+('fashion is now', 'fashion is not the way you dress alone but how you perceive yourself') ;
+
+select * from posts  where  ?1 is null or upper(posts.title) like concat('%', upper(?1), '%') ;
